@@ -2,9 +2,9 @@
 
 import { ECommerceFooter } from "@/components/e-commerce-footer"
 import { ECommerceHeader } from "@/components/e-commerce-header"
-import { Input } from "@/components/ui/input"
-import { ChevronDown, Search, Truck, RotateCcw, CreditCard, Package, User, HelpCircle, Phone, Mail, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ChevronDown, CreditCard, HelpCircle, Mail, Package, Phone, RotateCcw, Search, Truck, User } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -254,20 +254,18 @@ export default function FAQPage() {
 														</h3>
 													</div>
 													<ChevronDown
-														className={`w-6 h-6 text-muted-foreground transition-all duration-300 ${
-															isOpen
+														className={`w-6 h-6 text-muted-foreground transition-all duration-300 ${isOpen
 																? 'rotate-180 text-primary'
 																: 'group-hover:text-primary'
-														}`}
+															}`}
 													/>
 												</button>
 
 												<div
-													className={`transition-all duration-300 ease-in-out overflow-hidden ${
-														isOpen
+													className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen
 															? 'max-h-96 opacity-100'
 															: 'max-h-0 opacity-0'
-													}`}
+														}`}
 												>
 													<div className="px-8 pb-8 ml-16">
 														<div className="bg-muted/20 rounded-xl p-6 border-l-4 border-primary/30">

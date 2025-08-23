@@ -2,14 +2,14 @@
 
 import type React from "react"
 
-import { useState, useMemo } from "react"
-import { ChevronDown, ChevronUp, Filter, Grid, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { useCart } from "@/lib/cart-context"
+import { ChevronDown, ChevronUp, Filter, Grid, ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import { useMemo, useState } from "react"
 
 interface Product {
   id: number
@@ -22,7 +22,7 @@ interface Product {
   color: string
   size?: string
   priceValue: number
-}
+}	
 
 interface CategoryConfig {
   name: string
