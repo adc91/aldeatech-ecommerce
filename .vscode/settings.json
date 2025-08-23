@@ -1,0 +1,97 @@
+{
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.indentSize": 4,
+    "editor.detectIndentation": false,
+    "editor.useTabStops": true,
+    
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+    "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+    
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+    
+    "[typescript]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    
+    "[typescriptreact]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    
+    "[javascript]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    
+    "[javascriptreact]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    
+    "[json]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4
+    },
+    
+    "[jsonc]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4
+    },
+    
+    "[css]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4
+    },
+    
+    "[scss]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.indentSize": 4
+    },
+    
+    "emmet.includeLanguages": {
+        "typescript": "html",
+        "typescriptreact": "html",
+        "javascript": "html",
+        "javascriptreact": "html"
+    },
+    
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    
+    "tailwindCSS.includeLanguages": {
+        "typescript": "html",
+        "typescriptreact": "html",
+        "javascript": "html",
+        "javascriptreact": "html"
+    },
+    
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ]
+}

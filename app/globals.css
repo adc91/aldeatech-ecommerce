@@ -4,76 +4,76 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color tokens to match the professional e-commerce design brief */
+  /* Nueva gama de colores azules - Principal: #0d6efd, Secundario: #052c65 */
   --background: #ffffff;
   --foreground: #475569;
-  --card: #f1f5f9;
+  --card: #f8fafc;
   --card-foreground: #475569;
   --popover: #ffffff;
   --popover-foreground: #475569;
-  --primary: #059669;
+  --primary: #0d6efd;
   --primary-foreground: #ffffff;
-  --secondary: #10b981;
+  --secondary: #052c65;
   --secondary-foreground: #ffffff;
   --muted: #f1f5f9;
-  --muted-foreground: #475569;
-  --accent: #10b981;
+  --muted-foreground: #64748b;
+  --accent: #0d6efd;
   --accent-foreground: #ffffff;
-  --destructive: #be123c;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
-  --input: #f1f5f9;
-  --ring: rgba(0, 0, 0, 0.1);
-  --chart-1: #059669;
-  --chart-2: #10b981;
+  --input: #f8fafc;
+  --ring: rgba(13, 110, 253, 0.2);
+  --chart-1: #0d6efd;
+  --chart-2: #052c65;
   --chart-3: #475569;
-  --chart-4: #f1f5f9;
-  --chart-5: #be123c;
+  --chart-4: #94a3b8;
+  --chart-5: #dc2626;
   --radius: 0.5rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #475569;
-  --sidebar-primary: #059669;
+  --sidebar-primary: #0d6efd;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #10b981;
+  --sidebar-accent: #052c65;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e2e8f0;
-  --sidebar-ring: rgba(0, 0, 0, 0.1);
+  --sidebar-ring: rgba(13, 110, 253, 0.1);
 }
 
 .dark {
-  /* Updated dark mode tokens to complement the professional theme */
+  /* Tema oscuro con gama de colores azules */
   --background: #0f172a;
   --foreground: #f1f5f9;
   --card: #1e293b;
   --card-foreground: #f1f5f9;
   --popover: #1e293b;
   --popover-foreground: #f1f5f9;
-  --primary: #10b981;
-  --primary-foreground: #0f172a;
-  --secondary: #059669;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #1e40af;
   --secondary-foreground: #ffffff;
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
-  --accent: #10b981;
-  --accent-foreground: #0f172a;
-  --destructive: #dc2626;
+  --accent: #3b82f6;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #334155;
   --input: #1e293b;
-  --ring: rgba(255, 255, 255, 0.1);
-  --chart-1: #10b981;
-  --chart-2: #059669;
+  --ring: rgba(59, 130, 246, 0.3);
+  --chart-1: #3b82f6;
+  --chart-2: #1e40af;
   --chart-3: #94a3b8;
-  --chart-4: #1e293b;
-  --chart-5: #dc2626;
+  --chart-4: #475569;
+  --chart-5: #ef4444;
   --sidebar: #1e293b;
   --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #10b981;
-  --sidebar-primary-foreground: #0f172a;
-  --sidebar-accent: #059669;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e40af;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #334155;
-  --sidebar-ring: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgba(59, 130, 246, 0.2);
 }
 
 @theme inline {
@@ -122,4 +122,38 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Clases adicionales para la gama de colores azules */
+.text-primary-blue {
+  color: #0d6efd;
+}
+
+.text-secondary-blue {
+  color: #052c65;
+}
+
+.bg-primary-blue {
+  background-color: #0d6efd;
+}
+
+.bg-secondary-blue {
+  background-color: #052c65;
+}
+
+.border-primary-blue {
+  border-color: #0d6efd;
+}
+
+.border-secondary-blue {
+  border-color: #052c65;
+}
+
+/* Hover states para los nuevos colores */
+.hover\:bg-primary-blue:hover {
+  background-color: #0b5ed7;
+}
+
+.hover\:bg-secondary-blue:hover {
+  background-color: #041f4a;
 }

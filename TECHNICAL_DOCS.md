@@ -35,6 +35,14 @@ App (layout.tsx)
 └── ECommerceFooter (components/e-commerce-footer.tsx)
 ```
 
+### Arquitectura de UI
+**Sistema de design modernizado con colores azules y containers consistentes**
+
+- 🎨 **Esquema de colores**: Azul principal (#0d6efd) y secundario (#052c65)
+- 📐 **Containers**: max-w-6xl (1280px) para ancho consistente
+- 🎭 **Iconografía**: Sistema categorizado con Lucide React
+- ✨ **FAQ modernizado**: Icons por categoría con diseño mejorado
+
 ### CartContext - Estado Global con useReducer
 
 **Archivo**: `lib/cart-context.tsx`
@@ -417,8 +425,8 @@ app/
 │   └── page.tsx               → "/muebles"
 ├── contactanos/
 │   └── page.tsx               → "/contactanos"
-├── sobre-aldeatech/
-│   └── page.tsx               → "/sobre-aldeatech"
+├── nosotros/
+│   └── page.tsx               → "/nosotros"
 └── preguntas-frecuentes/
     ├── loading.tsx            → Loading UI
     └── page.tsx               → "/preguntas-frecuentes"
@@ -437,7 +445,7 @@ const navigationLinks = [
   { href: "/automotriz", label: "Automotriz" },
   { href: "/muebles", label: "Muebles" },
   { href: "/ofertas", label: "Ofertas" },
-  { href: "/sobre-aldeatech", label: "Sobre Nosotros" },
+  { href: "/nosotros", label: "La Empresa" },
   { href: "/contactanos", label: "Contacto" },
   { href: "/preguntas-frecuentes", label: "FAQ" }
 ]
@@ -537,9 +545,9 @@ export function CategoryPageTemplate({
 ```css
 :root {
   /* Colores principales AldeaTech */
-  --primary: #059669;       /* Verde principal */
-  --secondary: #10b981;     /* Verde secundario */
-  --accent: #10b981;        /* Color de acento */
+  --primary: #0d6efd;       /* Azul principal */
+  --secondary: #052c65;     /* Azul secundario */
+  --accent: #0d6efd;        /* Color de acento azul */
   
   /* Colores neutros */
   --background: #ffffff;    /* Fondo principal */
