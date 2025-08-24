@@ -71,6 +71,13 @@ export function CategoryPageTemplate({
 		priceRange: [0, 3000] as [number, number],
 	})
 
+	const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+	const [visibleProducts, setVisibleProducts] = useState(9);
+
+	const loadMoreProducts = () => {
+		setVisibleProducts((prev) => Math.min(prev + 6, filteredProducts.length));
+	};
+
 	const toggleFilter = (filter: keyof typeof openFilters) => {
 		setOpenFilters((prev) => ({ ...prev, [filter]: !prev[filter] }))
 	}
@@ -94,6 +101,7 @@ export function CategoryPageTemplate({
 			sizes: [],
 			priceRange: [0, 3000]
 		})
+		setVisibleProducts(12)
 	}
 
 	const hasActiveFilters = useMemo(() => {
@@ -128,6 +136,8 @@ export function CategoryPageTemplate({
 		})
 	}, [products, filters])
 
+	const isLoadMoreDisabled = visibleProducts >= filteredProducts.length;
+
 	const { dispatch } = useCart()
 
 	const addToCart = (product: Product, e: React.MouseEvent) => {
@@ -145,6 +155,10 @@ export function CategoryPageTemplate({
 		})
 		dispatch({ type: "OPEN_CART" })
 	}
+
+	const toggleViewMode = () => {
+		setViewMode((prev) => (prev === 'grid' ? 'list' : 'grid'));
+	};
 
 	return (
 		<div className="bg-background min-h-screen">
@@ -402,42 +416,74 @@ export function CategoryPageTemplate({
 						<div className="flex items-center justify-between mb-6">
 							<p className="text-muted-foreground">Mostrando {filteredProducts.length} productos</p>
 							<div className="flex items-center gap-2">
-								<Grid className="w-4 h-4 text-muted-foreground" />
-								<span className="text-sm text-muted-foreground">Vista de cuadrícula</span>
+								<button
+									onClick={toggleViewMode}
+									className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+								>
+									{viewMode === 'grid' ? (
+										<>
+											<Grid className="w-4 h-4" />
+											<span>Vista de cuadrícula</span>
+										</>
+									) : (
+										<>
+											<ChevronDown className="w-4 h-4" />
+											<span>Vista de lista</span>
+										</>
+									)}
+								</button>
 							</div>
 						</div>
 
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-							{filteredProducts.map((product) => (
+						<div
+							className={
+								viewMode === 'grid'
+									? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+									: 'space-y-6'
+							}
+						>
+							{filteredProducts.slice(0, visibleProducts).map((product) => (
 								<div
 									key={product.id}
-									className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 group hover:scale-[1.02]"
+									className={
+										viewMode === 'grid'
+											? 'bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 group hover:scale-[1.02]'
+											: 'flex items-center bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 group hover:scale-[1.02] p-4'
+									}
 								>
 									<Link href={`/product/${product.id}`}>
-										<div className="aspect-square bg-muted overflow-hidden cursor-pointer">
+										<div
+											className={
+												viewMode === 'grid'
+													? 'aspect-square bg-muted overflow-hidden cursor-pointer'
+													: 'w-24 h-24 bg-muted overflow-hidden cursor-pointer flex-shrink-0'
+											}
+										>
 											<img
-												src={product.image || "/placeholder.svg"}
+												src={product.image || '/placeholder.svg'}
 												alt={product.name}
 												className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
 											/>
 										</div>
 									</Link>
-									<div className="p-4">
-										<Link href={`/product/${product.id}`}>
-											<h3 className="font-medium text-card-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">
-												{product.name}
-											</h3>
-										</Link>
-										<div className="flex items-center gap-2 mb-3">
-											<span className="text-lg font-bold text-card-foreground">{product.price}</span>
-											<span className="text-sm text-muted-foreground line-through">{product.originalPrice}</span>
+									<div className={viewMode === 'grid' ? 'p-4' : 'flex-1 flex items-center justify-between pl-4'}>
+										<div>
+											<Link href={`/product/${product.id}`}>
+												<h3 className="font-medium text-card-foreground mb-1 line-clamp-1 group-hover:text-primary transition-colors cursor-pointer">
+													{product.name}
+												</h3>
+											</Link>
+											<div className="flex items-center gap-2">
+												<span className="text-lg font-bold text-card-foreground">{product.price}</span>
+												<span className="text-sm text-muted-foreground line-through">{product.originalPrice}</span>
+											</div>
 										</div>
 										<Button
 											onClick={(e) => addToCart(product, e)}
-											className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center gap-2"
+											className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center gap-2"
 										>
 											<ShoppingCart className="w-4 h-4" />
-											Agregar al carrito
+											Agregar
 										</Button>
 									</div>
 								</div>
@@ -446,8 +492,12 @@ export function CategoryPageTemplate({
 
 						{/* Load More Button */}
 						<div className="text-center mt-12">
-							<Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 transition-colors duration-200">
-								Mostrar más productos
+							<Button
+								onClick={loadMoreProducts}
+								disabled={isLoadMoreDisabled}
+								className={`bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 transition-colors duration-200 ${isLoadMoreDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+							>
+								{isLoadMoreDisabled ? 'No hay más productos' : 'Mostrar más productos'}
 							</Button>
 						</div>
 					</div>
