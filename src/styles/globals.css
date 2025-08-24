@@ -4,74 +4,95 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--destructive-foreground: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-	--chart-1: oklch(0.646 0.222 41.116);
-	--chart-2: oklch(0.6 0.118 184.704);
-	--chart-3: oklch(0.398 0.07 227.392);
-	--chart-4: oklch(0.828 0.189 84.429);
-	--chart-5: oklch(0.769 0.188 70.08);
+	/* AldeaTech Design System - Colores principales */
+	--background: oklch(1 0 0);                        /* Blanco puro */
+	--foreground: oklch(0.45 0 0);                     /* Gris oscuro para texto */
+	--card: oklch(0.97 0 0);                           /* Gris muy claro para cards */
+	--card-foreground: oklch(0.45 0 0);                /* Texto de cards */
+	--popover: oklch(1 0 0);                           /* Blanco para popovers */
+	--popover-foreground: oklch(0.45 0 0);             /* Texto de popovers */
+	
+	/* Azul principal AldeaTech #0d6efd */
+	--primary: oklch(0.55 0.19 262);                   /* Azul principal */
+	--primary-foreground: oklch(1 0 0);                /* Texto blanco en botones azules */
+	
+	/* Azul secundario AldeaTech #052c65 */
+	--secondary: oklch(0.25 0.12 262);                 /* Azul secundario oscuro */
+	--secondary-foreground: oklch(1 0 0);              /* Texto blanco en azul secundario */
+	
+	--muted: oklch(0.95 0 0);                          /* Gris muy claro */
+	--muted-foreground: oklch(0.55 0 0);               /* Texto en elementos silenciados */
+	--accent: oklch(0.55 0.19 262);                    /* Accent igual al primary */
+	--accent-foreground: oklch(1 0 0);                 /* Texto en accent */
+	--destructive: oklch(0.577 0.245 27.325);         /* Rojo para acciones destructivas */
+	--destructive-foreground: oklch(1 0 0);            /* Texto blanco en botones rojos */
+	--border: oklch(0.9 0 0);                          /* Bordes grises claros */
+	--input: oklch(0.9 0 0);                           /* Fondo de inputs */
+	--ring: oklch(0.55 0.19 262);                      /* Ring color igual al primary */
+	
+	/* Charts con colores azules */
+	--chart-1: oklch(0.55 0.19 262);                   /* Azul principal */
+	--chart-2: oklch(0.45 0.15 262);                   /* Azul más oscuro */
+	--chart-3: oklch(0.65 0.15 262);                   /* Azul más claro */
+	--chart-4: oklch(0.35 0.12 262);                   /* Azul muy oscuro */
+	--chart-5: oklch(0.75 0.12 262);                   /* Azul muy claro */
+	
 	--radius: 0.625rem;
-	--sidebar: oklch(0.985 0 0);
-	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.205 0 0);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.97 0 0);
-	--sidebar-accent-foreground: oklch(0.205 0 0);
-	--sidebar-border: oklch(0.922 0 0);
-	--sidebar-ring: oklch(0.708 0 0);
+	
+	/* Sidebar con tema azul */
+	--sidebar: oklch(0.98 0 0);                        /* Fondo claro para sidebar */
+	--sidebar-foreground: oklch(0.45 0 0);             /* Texto de sidebar */
+	--sidebar-primary: oklch(0.55 0.19 262);           /* Azul principal en sidebar */
+	--sidebar-primary-foreground: oklch(1 0 0);        /* Texto blanco en elementos activos */
+	--sidebar-accent: oklch(0.95 0 0);                 /* Accent en sidebar */
+	--sidebar-accent-foreground: oklch(0.45 0 0);      /* Texto de accent en sidebar */
+	--sidebar-border: oklch(0.9 0 0);                  /* Bordes de sidebar */
+	--sidebar-ring: oklch(0.55 0.19 262);              /* Ring de sidebar */
 }
 
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.145 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.145 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.985 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.396 0.141 25.723);
-	--destructive-foreground: oklch(0.637 0.237 25.331);
-	--border: oklch(0.269 0 0);
-	--input: oklch(0.269 0 0);
-	--ring: oklch(0.439 0 0);
-	--chart-1: oklch(0.488 0.243 264.376);
-	--chart-2: oklch(0.696 0.17 162.48);
-	--chart-3: oklch(0.769 0.188 70.08);
-	--chart-4: oklch(0.627 0.265 303.9);
-	--chart-5: oklch(0.645 0.246 16.439);
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(0.269 0 0);
-	--sidebar-ring: oklch(0.439 0 0);
+	/* Modo oscuro con tema azul AldeaTech */
+	--background: oklch(0.12 0 0);                     /* Fondo muy oscuro */
+	--foreground: oklch(0.95 0 0);                     /* Texto claro */
+	--card: oklch(0.18 0 0);                           /* Cards oscuros */
+	--card-foreground: oklch(0.95 0 0);                /* Texto claro en cards */
+	--popover: oklch(0.18 0 0);                        /* Popovers oscuros */
+	--popover-foreground: oklch(0.95 0 0);             /* Texto claro en popovers */
+	
+	/* Azul más brillante para modo oscuro */
+	--primary: oklch(0.65 0.22 262);                   /* Azul más brillante para contraste */
+	--primary-foreground: oklch(0.05 0 0);             /* Texto muy oscuro en botones azules */
+	
+	/* Azul secundario adaptado para oscuro */
+	--secondary: oklch(0.35 0.15 262);                 /* Azul secundario más claro */
+	--secondary-foreground: oklch(0.95 0 0);           /* Texto claro en secundario */
+	
+	--muted: oklch(0.25 0 0);                          /* Gris oscuro */
+	--muted-foreground: oklch(0.65 0 0);               /* Texto medio en silenciados */
+	--accent: oklch(0.65 0.22 262);                    /* Accent igual al primary */
+	--accent-foreground: oklch(0.05 0 0);              /* Texto oscuro en accent */
+	--destructive: oklch(0.55 0.25 15);               /* Rojo más claro para oscuro */
+	--destructive-foreground: oklch(0.95 0 0);         /* Texto claro en destructivo */
+	--border: oklch(0.25 0 0);                         /* Bordes oscuros */
+	--input: oklch(0.25 0 0);                          /* Fondo oscuro de inputs */
+	--ring: oklch(0.65 0.22 262);                      /* Ring azul brillante */
+	
+	/* Charts adaptados para modo oscuro */
+	--chart-1: oklch(0.65 0.22 262);                   /* Azul brillante */
+	--chart-2: oklch(0.55 0.18 262);                   /* Azul medio */
+	--chart-3: oklch(0.75 0.18 262);                   /* Azul muy claro */
+	--chart-4: oklch(0.45 0.15 262);                   /* Azul oscuro */
+	--chart-5: oklch(0.85 0.15 262);                   /* Azul ultra claro */
+	
+	/* Sidebar oscuro */
+	--sidebar: oklch(0.15 0 0);                        /* Fondo muy oscuro para sidebar */
+	--sidebar-foreground: oklch(0.95 0 0);             /* Texto claro en sidebar */
+	--sidebar-primary: oklch(0.65 0.22 262);           /* Azul brillante en sidebar */
+	--sidebar-primary-foreground: oklch(0.05 0 0);     /* Texto oscuro en elementos activos */
+	--sidebar-accent: oklch(0.25 0 0);                 /* Accent oscuro en sidebar */
+	--sidebar-accent-foreground: oklch(0.95 0 0);      /* Texto claro de accent en sidebar */
+	--sidebar-border: oklch(0.25 0 0);                 /* Bordes oscuros de sidebar */
+	--sidebar-ring: oklch(0.65 0.22 262);              /* Ring azul brillante */
 }
 
 @theme inline {
