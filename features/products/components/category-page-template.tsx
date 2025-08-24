@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { useCart } from "@/features/cart"
-import { ChevronDown, ChevronUp, Filter, Grid, ShoppingCart } from "lucide-react"
+import { ChevronDown, ChevronUp, Filter, Grid, RotateCcw, ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
@@ -86,6 +86,27 @@ export function CategoryPageTemplate({
 		}))
 	}
 
+	const resetAllFilters = () => {
+		setFilters({
+			category: null,
+			brands: [],
+			colors: [],
+			sizes: [],
+			priceRange: [0, 3000]
+		})
+	}
+
+	const hasActiveFilters = useMemo(() => {
+		return (
+			filters.category !== null ||
+			filters.brands.length > 0 ||
+			filters.colors.length > 0 ||
+			filters.sizes.length > 0 ||
+			filters.priceRange[0] !== 0 ||
+			filters.priceRange[1] !== 3000
+		)
+	}, [filters])
+
 	const filteredProducts = useMemo(() => {
 		return products.filter((product) => {
 			// Category filter
@@ -152,16 +173,16 @@ export function CategoryPageTemplate({
 							>
 								<div
 									className={`w-16 h-16 rounded-full flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-200 border border-border group-hover:scale-105 ${filters.category === category.name
-											? "bg-primary text-primary-foreground"
-											: "bg-background group-hover:bg-muted/50"
+										? "bg-primary text-primary-foreground"
+										: "bg-background group-hover:bg-muted/50"
 										}`}
 								>
 									<span className="text-2xl">{category.icon}</span>
 								</div>
 								<span
 									className={`mt-2 text-sm font-medium transition-colors duration-200 ${filters.category === category.name
-											? "text-primary"
-											: "text-muted-foreground group-hover:text-foreground"
+										? "text-primary"
+										: "text-muted-foreground group-hover:text-foreground"
 										}`}
 								>
 									{category.name}
@@ -199,9 +220,22 @@ export function CategoryPageTemplate({
 					{/* Sidebar Filters */}
 					<div className="lg:w-1/4">
 						<div className="bg-card border border-border rounded-lg p-6 sticky top-4">
-							<div className="flex items-center gap-2 mb-6">
-								<Filter className="w-5 h-5 text-muted-foreground" />
-								<h2 className="text-lg font-semibold text-card-foreground">Filtros</h2>
+							<div className="flex items-center justify-between mb-6">
+								<div className="flex items-center gap-2">
+									<Filter className="w-5 h-5 text-muted-foreground" />
+									<h2 className="text-lg font-semibold text-card-foreground">Filtros</h2>
+								</div>
+								{hasActiveFilters && (
+									<Button
+										variant="outline"
+										size="sm"
+										onClick={resetAllFilters}
+										className="text-muted-foreground hover:text-white"
+									>
+										<RotateCcw className="w-4 h-4 mr-1" />
+										Limpiar
+									</Button>
+								)}
 							</div>
 
 							{/* Price Range */}
