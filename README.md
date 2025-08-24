@@ -2,6 +2,9 @@
 
 Una aplicación de comercio electrónico moderna construida con **Next.js 15**, **React 19**, **TypeScript** y **Tailwind CSS v4**.
 
+> **📚 Proyecto de Aprendizaje**  
+> Este proyecto **NO es comercial** y forma parte de un proyecto de aprendizaje continuo de las nuevas tecnologías web para mantenerse actualizado. Es de **libre uso y código abierto**, y puede utilizarse como base para cualquier proyecto comercial sin restricciones.
+
 ![Next.js](https://img.shields.io/badge/Next.js-15.2.4-000000?style=for-the-badge&logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)
@@ -32,8 +35,10 @@ open http://localhost:3000
 - [Comandos de Desarrollo](#-comandos-de-desarrollo)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Guía de Contribución](#-guía-de-contribución)
+- [Arquitectura Feature-Based](#-arquitectura-feature-based)
 - [Troubleshooting](#-troubleshooting)
 - [Roadmap](#-roadmap)
+- [Licencia](#-licencia)
 
 ## 🔧 Prerrequisitos
 
@@ -211,50 +216,87 @@ pnpm e2e              # Tests end-to-end (Playwright)
 ```
 aldea-ecommerce/
 │
-├── 📂 app/                      # Next.js App Router
+├── 📂 app/                      # Next.js App Router con Route Groups
 │   ├── 📄 layout.tsx            # Layout raíz con providers
 │   ├── 📄 page.tsx              # Página principal (homepage)
 │   ├── 📄 globals.css           # Estilos Tailwind globales
 │   │
-│   ├── 📂 carrito/              # Carrito de compras
-│   │   └── 📄 page.tsx
+│   ├── 📂 (marketing)/          # Grupo de rutas de marketing
+│   │   ├── 📂 contactanos/      # Página de contacto
+│   │   ├── 📂 preguntas-frecuentes/  # FAQ
+│   │   └── 📂 sobre-aldeatech/  # Acerca de
 │   │
-│   ├── 📂 electronics/          # Categorías de productos
-│   ├── 📂 celulares/
-│   ├── 📂 televisores/
-│   ├── 📂 consolas/
-│   ├── 📂 deportes/
-│   ├── 📂 calzados-deportivos/
-│   ├── 📂 automotriz/
-│   ├── 📂 muebles/
-│   │
-│   ├── 📂 contactanos/          # Páginas corporativas
-│   ├── 📂 nosotros/
-│   └── 📂 preguntas-frecuentes/
+│   └── 📂 (shop)/               # Grupo de rutas de e-commerce
+│       ├── 📂 carrito/          # Carrito de compras
+│       ├── 📂 electronics/      # Categorías de productos
+│       ├── 📂 celulares/
+│       ├── 📂 televisores/
+│       ├── 📂 consolas/
+│       ├── 📂 deportes/
+│       ├── 📂 calzados-deportivos/
+│       ├── 📂 automotriz/
+│       └── 📂 muebles/
 │
-├── 📂 components/               # Componentes React
-│   ├── 📂 ui/                   # Componentes base (shadcn/ui)
+├── 📂 features/                 # Arquitectura basada en características
+│   ├── 📂 cart/                 # Feature del carrito de compras
+│   │   ├── 📂 components/       # Componentes específicos del carrito
+│   │   │   └── 📄 shopping-cart-modal.tsx
+│   │   ├── 📂 context/          # Contexto y estado del carrito
+│   │   │   └── 📄 cart-context.tsx
+│   │   ├── 📂 services/         # Lógica de negocio del carrito
+│   │   │   └── 📄 cart-service.ts
+│   │   ├── 📄 types.ts          # Tipos TypeScript
+│   │   └── 📄 index.ts          # Exports del feature
+│   │
+│   ├── 📂 products/             # Feature de productos
+│   │   ├── 📂 components/       # Componentes de productos
+│   │   │   ├── 📄 category-page-template.tsx
+│   │   │   ├── 📄 featured-products.tsx
+│   │   │   ├── 📄 featured-categories.tsx
+│   │   │   └── 📄 electronics-content.tsx
+│   │   ├── 📂 services/         # Servicios de productos
+│   │   │   └── 📄 products-service.ts
+│   │   ├── 📄 types.ts          # Tipos de productos
+│   │   └── 📄 index.ts          # Exports del feature
+│   │
+│   └── 📂 user/                 # Feature de usuario (preparado)
+│       ├── 📂 components/       # Componentes de usuario
+│       ├── 📂 context/          # Contexto de usuario
+│       ├── 📂 services/         # Servicios de usuario
+│       │   └── 📄 user-service.ts
+│       ├── 📄 types.ts          # Tipos de usuario
+│       └── 📄 index.ts          # Exports del feature
+│
+├── 📂 components/               # Componentes organizados por dominio
+│   ├── 📂 ui/                   # Componentes base shadcn/ui (40+ componentes)
 │   │   ├── 📄 button.tsx
 │   │   ├── 📄 card.tsx
 │   │   ├── 📄 carousel.tsx
-│   │   ├── 📄 dialog.tsx
-│   │   └── ... (20+ componentes)
+│   │   └── ... (40+ componentes UI)
 │   │
-│   ├── 📄 category-page-template.tsx    # Template de categorías
-│   ├── 📄 e-commerce-header.tsx         # Header principal
-│   ├── 📄 e-commerce-footer.tsx         # Footer
-│   ├── 📄 featured-products.tsx         # Productos destacados
-│   ├── 📄 shopping-cart-modal.tsx       # Modal del carrito
-│   ├── 📄 hero-carousel.tsx             # Carrusel principal
-│   └── 📄 customer-testimonials.tsx     # Testimonios
+│   ├── 📂 common/               # Componentes compartidos
+│   │   ├── 📄 header.tsx        # Header con navegación
+│   │   ├── 📄 footer.tsx        # Footer del sitio
+│   │   ├── 📄 faq-section.tsx   # Sección de FAQ
+│   │   └── 📄 theme-provider.tsx # Proveedor de temas
+│   │
+│   ├── 📂 marketing/            # Componentes de marketing
+│   │   ├── 📄 hero-carousel.tsx # Carrusel principal
+│   │   ├── 📄 customer-testimonials.tsx # Testimonios
+│   │   └── 📄 promotional-blocks.tsx # Bloques promocionales
+│   │
+│   └── 📂 shop/                 # Componentes específicos de tienda
 │
-├── 📂 lib/                      # Utilidades y configuración
-│   ├── 📄 cart-context.tsx      # Context del carrito (estado global)
-│   └── 📄 utils.ts              # Utilidades (cn function)
-│
-├── 📂 hooks/                    # Custom hooks
-│   ├── 📄 use-mobile.ts         # Detectar dispositivos móviles
-│   └── 📄 use-toast.ts          # Sistema de notificaciones
+├── 📂 src/                      # Código fuente organizado
+│   ├── 📂 lib/                  # Utilidades y helpers
+│   │   └── 📄 utils.ts          # Utilidades de Tailwind (cn function)
+│   │
+│   ├── 📂 hooks/                # Hooks genéricos reutilizables
+│   │   ├── 📄 use-mobile.ts     # Detectar dispositivos móviles
+│   │   └── 📄 use-toast.ts      # Sistema de notificaciones
+│   │
+│   └── 📂 styles/               # Estilos globales
+│       └── 📄 globals.css       # CSS global de Tailwind
 │
 ├── 📂 public/                   # Assets estáticos
 │   ├── 🖼️ aldeatech-logo-*.png  # Logos de la marca
@@ -273,25 +315,51 @@ aldea-ecommerce/
 └── 📄 README.md                 # Este archivo
 ```
 
-### Explicación de Directorios Clave
+## 🏗️ Arquitectura Feature-Based
 
-#### `app/` - Next.js App Router
-- **Layout y Páginas**: Cada carpeta representa una ruta
-- **file-system routing**: `app/categoria/page.tsx` = `/categoria`
-- **layout.tsx**: Layout compartido con providers globales
-- **globals.css**: Estilos Tailwind y CSS variables personalizadas
+### Beneficios de la Arquitectura
 
-#### `components/` - Componentes React
-- **`ui/`**: Componentes base de shadcn/ui (botones, cards, etc.)
-- **Componentes de negocio**: Específicos para e-commerce
-- **Patrón de nomenclatura**: PascalCase para componentes, kebab-case para archivos
+- 🏗️ **Modularidad**: Cada feature es autocontenido con sus components, services y types
+- 🔄 **Escalabilidad**: Fácil agregar nuevos features sin afectar existentes  
+- 🎯 **Separación clara**: Route groups separan marketing de shop
+- 📦 **Reutilización**: Components organizados por dominio
+- 🧪 **Mantenibilidad**: Código relacionado agrupado, imports más claros
 
-#### `lib/` - Lógica de Negocio
-- **`cart-context.tsx`**: Estado global del carrito con Context API
-- **`utils.ts`**: Utilidades compartidas (función `cn` para clases CSS)
+### Features Implementadas
 
-#### `hooks/` - Custom Hooks
-- Lógica reutilizable extraída de componentes
+#### `features/cart/` - Carrito de Compras Completo
+- **Context**: Estado global del carrito con React Context API
+- **Components**: Modal del carrito, componentes de interacción
+- **Services**: Cálculos de totales, impuestos, envío
+- **Types**: Interfaces TypeScript para CartItem, CartState, CartAction
+
+#### `features/products/` - Gestión de Productos
+- **Components**: Templates de categorías, productos destacados
+- **Services**: Filtros, búsqueda, gestión de catálogo
+- **Types**: Product, ProductCategory, filtros
+
+#### `features/user/` - Base para Usuarios (Preparado)
+- **Services**: Gestión de perfiles, direcciones
+- **Types**: User, UserPreferences, UserAddress
+- **Listo para**: Sistema de autenticación y perfiles
+
+### Explicación de Directorios
+
+#### `app/` - Next.js App Router con Route Groups
+- **`(marketing)/`**: Páginas institucionales (contacto, FAQ, sobre nosotros)
+- **`(shop)/`**: Páginas de e-commerce (carrito, categorías de productos)
+- **Route Groups**: Organizan rutas sin afectar URLs
+
+#### `components/` por Dominio
+- **`ui/`**: 40+ componentes base de shadcn/ui
+- **`common/`**: Header, Footer, FAQ - compartidos en toda la app
+- **`marketing/`**: Hero, testimonials, promociones
+- **`shop/`**: Componentes específicos de tienda (preparado para expansión)
+
+#### `src/` - Código Fuente Organizado
+- **`lib/`**: Utilidades y helpers (función `cn`, configuraciones)
+- **`hooks/`**: Solo hooks genéricos y reutilizables
+- **`styles/`**: Estilos globales y variables CSS
 - Prefijo `use` para seguir convenciones de React
 
 ## 🤝 Guía de Contribución
@@ -773,6 +841,41 @@ import Image from 'next/image'
 - [Tailwind CSS v4](https://tailwindcss.com/docs)
 - [shadcn/ui Components](https://ui.shadcn.com/)
 
+## 📄 Licencia
+
+Este proyecto es **libre y de código abierto** bajo la licencia MIT.
+
+### MIT License
+
+```
+Copyright (c) 2024 AldeaTech E-Commerce
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+### Uso Libre y Comercial
+
+✅ **Uso personal y comercial permitido**  
+✅ **Modificación y distribución libre**  
+✅ **Sin restricciones de uso**  
+✅ **Perfecto como base para proyectos comerciales**
+
 ---
 
-**Construido con ❤️ por el equipo de [AldeaTech](https://aldeatech.co) usando las mejores tecnologías web modernas.**
+**Construido con ❤️ como proyecto de aprendizaje usando las mejores tecnologías web modernas.**

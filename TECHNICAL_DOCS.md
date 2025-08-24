@@ -15,24 +15,33 @@ Documentación técnica comprehensiva de la arquitectura, componentes y patrones
 
 ---
 
-## 🏗️ Arquitectura de Componentes React
+## 🏗️ Arquitectura Feature-Based con Route Groups
 
-### Jerarquía de Componentes
+### Arquitectura de Componentes
 
 ```
 App (layout.tsx)
-├── CartProvider (lib/cart-context.tsx)
-├── ECommerceHeader (components/e-commerce-header.tsx)
-│   ├── ShoppingCartModal (components/shopping-cart-modal.tsx)
-│   └── Navigation Links
-├── Page Content
-│   ├── HeroCarousel (components/hero-carousel.tsx)
-│   ├── FeaturedCategories (components/featured-categories.tsx)
-│   ├── FeaturedProducts (components/featured-products.tsx)
-│   ├── PromotionalBlocks (components/promotional-blocks.tsx)
-│   ├── CustomerTestimonials (components/customer-testimonials.tsx)
-│   └── FAQSection (components/faq-section.tsx)
-└── ECommerceFooter (components/e-commerce-footer.tsx)
+├── CartProvider (features/cart/)
+├── Route Groups
+│   ├── (marketing)/ - Páginas de marketing
+│   │   ├── contactanos/
+│   │   ├── preguntas-frecuentes/
+│   │   └── sobre-aldeatech/
+│   └── (shop)/ - Páginas de e-commerce
+│       ├── carrito/
+│       └── categorías (electronics, celulares, etc.)
+├── Features
+│   ├── cart/ - Carrito completo con context, components, services
+│   ├── products/ - Productos con components y services
+│   └── user/ - Base para autenticación y perfiles
+├── Components por dominio
+│   ├── common/ - Header, Footer, FAQ
+│   ├── marketing/ - Hero, Testimonials, Promociones
+│   └── ui/ - shadcn/ui components (40+)
+└── Código organizado en src/
+    ├── hooks/ - Hooks genéricos reutilizables
+    ├── lib/ - Utilidades y helpers
+    └── styles/ - Estilos globales
 ```
 
 ### Arquitectura de UI
@@ -43,9 +52,19 @@ App (layout.tsx)
 - 🎭 **Iconografía**: Sistema categorizado con Lucide React
 - ✨ **FAQ modernizado**: Icons por categoría con diseño mejorado
 
-### CartContext - Estado Global con useReducer
+### Arquitectura Feature-Based
 
-**Archivo**: `lib/cart-context.tsx`
+**Beneficios de la estructura:**
+- 🏗️ **Modularidad**: Cada feature es autocontenido con sus components, services y types
+- 🔄 **Escalabilidad**: Fácil agregar nuevos features sin afectar existentes  
+- 🎯 **Separación de responsabilidades**: Route groups separan marketing de shop
+- 📦 **Reutilización**: Components organizados por dominio para mejor reutilización
+- 🧪 **Mantenibilidad**: Código relacionado agrupado, imports más claros
+
+### Cart Feature - Estado Global con useReducer
+
+**Archivo**: `features/cart/context/cart-context.tsx`  
+**Exports**: `features/cart/index.ts`
 
 #### Interfaces TypeScript
 
