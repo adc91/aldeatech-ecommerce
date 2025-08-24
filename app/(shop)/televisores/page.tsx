@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "Smart TV", icon: "📺", href: "/televisores" },
@@ -16,7 +16,7 @@ const products = [
 		name: 'Samsung QLED 65" 4K Smart TV',
 		price: "$1,299",
 		originalPrice: "$1,599",
-		image: "/samsung-qled-65-inch.png",
+		image: "/placeholder.svg",
 		category: "QLED",
 		brand: "Samsung",
 		color: "black",
@@ -38,7 +38,7 @@ const products = [
 		name: 'Sony Bravia XR 75" 4K TV',
 		price: "$2,299",
 		originalPrice: "$2,799",
-		image: "/sony-bravia-xr-75-inch.png",
+		image: "/placeholder.svg",
 		category: "4K Ultra HD",
 		brand: "Sony",
 		color: "black",
@@ -49,7 +49,7 @@ const products = [
 		name: 'TCL 43" Smart TV Android',
 		price: "$399",
 		originalPrice: "$499",
-		image: "/tcl-43-inch-smart-tv.png",
+		image: "/placeholder.svg",
 		category: "Smart TV",
 		brand: "TCL",
 		color: "black",
@@ -60,7 +60,7 @@ const products = [
 		name: 'Hisense 50" 4K ULED TV',
 		price: "$599",
 		originalPrice: "$799",
-		image: "/hisense-50-inch-uled.png",
+		image: "/placeholder.svg",
 		category: "4K Ultra HD",
 		brand: "Hisense",
 		color: "black",
@@ -71,7 +71,7 @@ const products = [
 		name: 'Roku 32" Smart TV HD',
 		price: "$249",
 		originalPrice: "$329",
-		image: "/roku-32-inch-smart-tv.png",
+		image: "/placeholder.svg",
 		category: "Smart TV",
 		brand: "Roku",
 		color: "black",

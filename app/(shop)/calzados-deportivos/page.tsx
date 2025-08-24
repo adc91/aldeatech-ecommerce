@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "Running", icon: "👟", href: "/calzados-deportivos" },
@@ -16,7 +16,7 @@ const products = [
 		name: "Nike Air Max 270",
 		price: "$149",
 		originalPrice: "$179",
-		image: "/nike-air-max-270.png",
+		image: "/placeholder.svg",
 		category: "Casual",
 		brand: "Nike",
 		color: "black",
@@ -28,7 +28,7 @@ const products = [
 		name: "Adidas Ultraboost 22",
 		price: "$189",
 		originalPrice: "$229",
-		image: "/adidas-ultraboost-22.png",
+		image: "/placeholder.svg",
 		category: "Running",
 		brand: "Adidas",
 		color: "white",
@@ -40,7 +40,7 @@ const products = [
 		name: "Jordan Air Jordan 1",
 		price: "$169",
 		originalPrice: "$199",
-		image: "/jordan-air-jordan-1.png",
+		image: "/placeholder.svg",
 		category: "Basketball",
 		brand: "Jordan",
 		color: "red",
@@ -52,7 +52,7 @@ const products = [
 		name: "Puma Future Z 1.1",
 		price: "$199",
 		originalPrice: "$249",
-		image: "/puma-future-z-11.png",
+		image: "/placeholder.svg",
 		category: "Fútbol",
 		brand: "Puma",
 		color: "blue",
@@ -64,7 +64,7 @@ const products = [
 		name: "New Balance 990v5",
 		price: "$174",
 		originalPrice: "$199",
-		image: "/new-balance-990v5.png",
+		image: "/placeholder.svg",
 		category: "Lifestyle",
 		brand: "New Balance",
 		color: "gray",
@@ -76,7 +76,7 @@ const products = [
 		name: "Reebok Nano X2",
 		price: "$129",
 		originalPrice: "$159",
-		image: "/reebok-nano-x2.png",
+		image: "/placeholder.svg",
 		category: "Training",
 		brand: "Reebok",
 		color: "black",

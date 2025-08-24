@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "iPhone", icon: "📱", href: "/celulares" },
@@ -49,7 +49,7 @@ const products = [
 		name: "Xiaomi 14 Pro 512GB",
 		price: "$799",
 		originalPrice: "$999",
-		image: "/xiaomi-14-pro-512gb.png",
+		image: "/placeholder.svg",
 		category: "Xiaomi",
 		brand: "Xiaomi",
 		color: "white",
@@ -60,7 +60,7 @@ const products = [
 		name: "iPhone 14 128GB",
 		price: "$699",
 		originalPrice: "$899",
-		image: "/iphone-14-128gb.png",
+		image: "/placeholder.svg",
 		category: "iPhone",
 		brand: "Apple",
 		color: "blue",
@@ -71,7 +71,7 @@ const products = [
 		name: "OnePlus 12 256GB",
 		price: "$649",
 		originalPrice: "$799",
-		image: "/oneplus-12-256gb.png",
+		image: "/placeholder.svg",
 		category: "Android",
 		brand: "OnePlus",
 		color: "green",

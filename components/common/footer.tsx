@@ -40,7 +40,7 @@ export function ECommerceFooter() {
 					{/* Sección del Logo */}
 					<div>
 						<h2 className="font-serif text-2xl font-bold mb-4">
-							La Empresa
+							AldeaTech E-Commerce
 						</h2>
 						<p className="text-slate-300 text-sm leading-relaxed max-w-md">
 							Tu socio de confianza para productos de calidad y un
@@ -107,7 +107,7 @@ export function ECommerceFooter() {
 			<div className="border-t border-slate-700 bg-slate-950">
 				<div className="max-w-6xl mx-auto px-4 py-4">
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
-						<div>© 2025 La Empresa</div>
+						<div>© {new Date().getFullYear()} AldeaTech E-Commerce</div>
 						<div className="flex flex-wrap items-center gap-4">
 							<a
 								href="/terms"

@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "PlayStation", icon: "🎮", href: "/consolas" },
@@ -27,7 +27,7 @@ const products = [
 		name: "Xbox Series X",
 		price: "$499",
 		originalPrice: "$599",
-		image: "/xbox-series-x-console.png",
+		image: "/placeholder.svg",
 		category: "Xbox",
 		brand: "Microsoft",
 		color: "black",
@@ -49,7 +49,7 @@ const products = [
 		name: "Steam Deck 512GB",
 		price: "$649",
 		originalPrice: "$749",
-		image: "/steam-deck-512gb.png",
+		image: "/placeholder.svg",
 		category: "PC Gaming",
 		brand: "Valve",
 		color: "black",
@@ -60,7 +60,7 @@ const products = [
 		name: "PlayStation 5 DualSense Controller",
 		price: "$69",
 		originalPrice: "$79",
-		image: "/ps5-dualsense-controller.png",
+		image: "/placeholder.svg",
 		category: "Accesorios",
 		brand: "Sony",
 		color: "white",
@@ -71,7 +71,7 @@ const products = [
 		name: "Xbox Wireless Controller",
 		price: "$59",
 		originalPrice: "$69",
-		image: "/xbox-wireless-controller.png",
+		image: "/placeholder.svg",
 		category: "Accesorios",
 		brand: "Microsoft",
 		color: "black",

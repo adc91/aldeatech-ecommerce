@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "Fitness", icon: "💪", href: "/deportes" },
@@ -16,7 +16,7 @@ const products = [
 		name: "Set de Mancuernas Ajustables",
 		price: "$299",
 		originalPrice: "$399",
-		image: "/set-mancuernas-ajustables.png",
+		image: "/placeholder.svg",
 		category: "Fitness",
 		brand: "Bowflex",
 		color: "black",
@@ -27,7 +27,7 @@ const products = [
 		name: "Balón de Fútbol Profesional",
 		price: "$49",
 		originalPrice: "$69",
-		image: "/balon-futbol-profesional.png",
+		image: "/placeholder.svg",
 		category: "Fútbol",
 		brand: "Adidas",
 		color: "white",
@@ -38,7 +38,7 @@ const products = [
 		name: "Canasta de Basketball Portátil",
 		price: "$199",
 		originalPrice: "$249",
-		image: "/canasta-basketball-portatil.png",
+		image: "/placeholder.svg",
 		category: "Basketball",
 		brand: "Spalding",
 		color: "black",
@@ -49,7 +49,7 @@ const products = [
 		name: "Gafas de Natación Profesional",
 		price: "$39",
 		originalPrice: "$49",
-		image: "/gafas-natacion-profesional.png",
+		image: "/placeholder.svg",
 		category: "Natación",
 		brand: "Speedo",
 		color: "blue",
@@ -60,7 +60,7 @@ const products = [
 		name: "Bicicleta de Montaña 21V",
 		price: "$599",
 		originalPrice: "$799",
-		image: "/bicicleta-montana-21v.png",
+		image: "/placeholder.svg",
 		category: "Ciclismo",
 		brand: "Trek",
 		color: "red",
@@ -71,7 +71,7 @@ const products = [
 		name: "Carpa para 4 Personas",
 		price: "$149",
 		originalPrice: "$199",
-		image: "/carpa-4-personas.png",
+		image: "/placeholder.svg",
 		category: "Outdoor",
 		brand: "Coleman",
 		color: "green",

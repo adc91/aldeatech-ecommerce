@@ -1,5 +1,5 @@
-import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 import { ECommerceHeader } from "@/components/common/header"
+import { CategoryPageTemplate } from "@/features/products/components/category-page-template"
 
 const categories = [
 	{ name: "Sala", icon: "🛋️", href: "/muebles" },
@@ -16,7 +16,7 @@ const products = [
 		name: "Sofá Seccional 3 Plazas",
 		price: "$899",
 		originalPrice: "$1,199",
-		image: "/sofa-seccional-3-plazas.png",
+		image: "/placeholder.svg",
 		category: "Sala",
 		brand: "IKEA",
 		color: "gray",
@@ -27,7 +27,7 @@ const products = [
 		name: "Cama Queen con Cabecera",
 		price: "$649",
 		originalPrice: "$799",
-		image: "/cama-queen-cabecera.png",
+		image: "/placeholder.svg",
 		category: "Dormitorio",
 		brand: "Ashley",
 		color: "brown",
@@ -38,7 +38,7 @@ const products = [
 		name: "Mesa de Comedor 6 Personas",
 		price: "$549",
 		originalPrice: "$699",
-		image: "/mesa-comedor-6-personas.png",
+		image: "/placeholder.svg",
 		category: "Comedor",
 		brand: "West Elm",
 		color: "brown",
@@ -49,7 +49,7 @@ const products = [
 		name: "Escritorio Ejecutivo L-Shape",
 		price: "$399",
 		originalPrice: "$499",
-		image: "/escritorio-ejecutivo-l-shape.png",
+		image: "/placeholder.svg",
 		category: "Oficina",
 		brand: "Herman Miller",
 		color: "black",
@@ -60,7 +60,7 @@ const products = [
 		name: "Gabinete de Cocina Modular",
 		price: "$1,299",
 		originalPrice: "$1,599",
-		image: "/gabinete-cocina-modular.png",
+		image: "/placeholder.svg",
 		category: "Cocina",
 		brand: "IKEA",
 		color: "white",
@@ -71,7 +71,7 @@ const products = [
 		name: "Set de Patio 4 Piezas",
 		price: "$799",
 		originalPrice: "$999",
-		image: "/set-patio-4-piezas.png",
+		image: "/placeholder.svg",
 		category: "Exterior",
 		brand: "Pottery Barn",
 		color: "brown",

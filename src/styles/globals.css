@@ -142,4 +142,44 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	/* Cursor pointer para todos los elementos interactivos */
+	button,
+	[role="button"],
+	[type="button"],
+	[type="submit"],
+	[type="reset"],
+	input[type="checkbox"],
+	input[type="radio"],
+	select,
+	a,
+	[tabindex]:not([tabindex="-1"]),
+	summary,
+	label[for] {
+		cursor: pointer;
+	}
+
+	/* Cursor pointer para elementos con onClick o interacciones */
+	[onclick],
+	.cursor-pointer {
+		cursor: pointer;
+	}
+
+	/* Excepción: inputs de texto mantienen cursor text */
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	textarea {
+		cursor: text;
+	}
+
+	/* Excepción: elementos disabled mantienen cursor por defecto */
+	:disabled,
+	[disabled] {
+		cursor: not-allowed;
+	}
 }
