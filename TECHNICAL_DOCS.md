@@ -447,7 +447,7 @@ const navigationLinks = [
   { href: "/ofertas", label: "Ofertas" },
   { href: "/nosotros", label: "La Empresa" },
   { href: "/contactanos", label: "Contacto" },
-  { href: "/preguntas-frecuentes", label: "FAQ" }
+  { href: "/preguntas-frecuentes", label: "FAQs" }
 ]
 
 // Renderizado de navegación
