@@ -4,49 +4,78 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/src/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const products = [
-	{
-		id: 1,
-		title: 'Auriculares inalámbricos',
-		price: '$199.99',
-		image: '/placeholder-z6vnr.png',
-	},
-	{
-		id: 2,
-		title: 'Reloj inteligente',
-		price: '$299.99',
-		image: '/placeholder-3jbw8.png',
-	},
-	{
-		id: 3,
-		title: 'Soporte para laptop',
-		price: '$79.99',
-		image: '/aluminum-laptop-stand.png',
-	},
-	{
-		id: 4,
-		title: 'Cafetera',
-		price: '$149.99',
-		image: '/sleek-coffee-maker-kitchen.png',
-	},
-	{
-		id: 5,
-		title: 'Lámpara de escritorio',
-		price: '$89.99',
-		image: '/modern-led-desk-lamp.png',
-	},
-	{
-		id: 6,
-		title: 'Altavoz Bluetooth',
-		price: '$129.99',
-		image: '/placeholder-8gfyn.png',
-	},
-];
+interface Product {
+	id: number
+	name: string
+	price: string
+	image?: string
+	description?: string
+}
 
 export function FeaturedProducts() {
+	const [products, setProducts] = useState<Product[]>([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		async function fetchFeaturedProducts() {
+			try {
+				const response = await fetch('/api/products?featured=true');
+				const data = await response.json();
+
+				if (data.success) {
+					// Map API data to the format expected by the component
+					const mappedProducts = data.data.map((product: any) => ({
+						id: product.id,
+						title: product.name, // Keep 'title' for compatibility
+						name: product.name,
+						price: product.price,
+						image: product.image || '/placeholder.svg',
+						description: product.description
+					}));
+					setProducts(mappedProducts);
+				}
+			} catch (error) {
+				console.error('Error fetching featured products:', error);
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchFeaturedProducts();
+	}, []);
+
+	if (loading) {
+		return (
+			<section className="w-full">
+				<div className="text-center mb-12">
+					<h2 className="text-3xl font-bold text-foreground mb-4">
+						Productos Destacados
+					</h2>
+					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+						Cargando productos...
+					</p>
+				</div>
+			</section>
+		);
+	}
+
+	if (products.length === 0) {
+		return (
+			<section className="w-full">
+				<div className="text-center mb-12">
+					<h2 className="text-3xl font-bold text-foreground mb-4">
+						Productos Destacados
+					</h2>
+					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+						No hay productos destacados disponibles.
+					</p>
+				</div>
+			</section>
+		);
+	}
 	const itemsPerView = 3;
 	const maxIndex = Math.max(0, products.length - itemsPerView);
 
@@ -71,7 +100,7 @@ export function FeaturedProducts() {
 			</div>
 
 			<div className="relative">
-				{/* Botones de Navegación */}
+				{/* Navigation Buttons */}
 				<Button
 					variant="outline"
 					size="icon"
@@ -102,7 +131,7 @@ export function FeaturedProducts() {
 					<ChevronRight className="h-4 w-4" />
 				</Button>
 
-				{/* Contenedor de Productos */}
+				{/* Product Container */}
 				<div className="overflow-hidden mx-12">
 					<div
 						className="flex transition-transform duration-500 ease-in-out"
@@ -130,7 +159,7 @@ export function FeaturedProducts() {
 													product.image ||
 													'/placeholder.svg'
 												}
-												alt={product.title}
+												alt={product.name}
 												className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
 											/>
 											<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -142,7 +171,7 @@ export function FeaturedProducts() {
 										</div>
 										<div className="p-6">
 											<h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-												{product.title}
+												{product.name}
 											</h3>
 											<p className="text-xl font-bold text-accent">
 												{product.price}
@@ -155,7 +184,7 @@ export function FeaturedProducts() {
 					</div>
 				</div>
 
-				{/* Indicador de Puntos */}
+				{/* Dots Indicator */}
 				<div className="flex justify-center mt-8 space-x-2">
 					{Array.from({ length: maxIndex + 1 }).map((_, index) => (
 						<button
@@ -172,7 +201,7 @@ export function FeaturedProducts() {
 				</div>
 			</div>
 
-			{/* Vista Móvil - Tarjetas Apiladas */}
+			{/* Mobile View - Stacked Cards */}
 			<div className="md:hidden mt-8">
 				<div className="grid grid-cols-1 gap-6">
 					{products.slice(0, 3).map((product) => (
@@ -186,12 +215,12 @@ export function FeaturedProducts() {
 										src={
 											product.image || '/placeholder.svg'
 										}
-										alt={product.title}
+										alt={product.name}
 										className="w-24 h-24 object-cover"
 									/>
 									<div className="p-4 flex-1">
 										<h3 className="text-lg font-semibold text-foreground mb-1">
-											{product.title}
+											{product.name}
 										</h3>
 										<p className="text-lg font-bold text-accent">
 											{product.price}
@@ -206,3 +235,4 @@ export function FeaturedProducts() {
 		</section>
 	);
 }
+
