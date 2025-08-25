@@ -1,8 +1,11 @@
+"use client"
+
 import { ECommerceFooter } from '@/components/common/footer';
 import { ECommerceHeader } from '@/components/common/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	Clock,
 	Facebook,
@@ -12,8 +15,58 @@ import {
 	Phone,
 	Twitter,
 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+	name: z
+		.string()
+		.min(1, "El nombre es requerido")
+		.min(3, "El nombre debe tener al menos 3 caracteres"),
+	email: z
+		.string()
+		.min(1, "El correo electrónico es requerido")
+		.email("El correo electrónico no es válido"),
+	phone: z
+		.string()
+		.optional()
+		.refine((val) => {
+			if (!val) return true; // Optional
+			const phoneRegex = /^\+595\d{9}$/;
+			return phoneRegex.test(val);
+		}, "El formato debe ser +5959 XX XXX XXX (sin espacios)"),
+	message: z
+		.string()
+		.min(1, "El mensaje es requerido")
+		.min(10, "El mensaje debe tener al menos 10 caracteres"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function ContactPage() {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		reset,
+	} = useForm<ContactFormData>({
+		resolver: zodResolver(contactSchema),
+	});
+
+	const onSubmit = async (data: ContactFormData) => {
+		try {
+			// Simulate form submission
+			console.log('Datos del formulario:', data);
+			await new Promise(resolve => setTimeout(resolve, 2000));
+
+			// Reset form after successful submission
+			reset();
+			toast.success('Mensaje enviado correctamente');
+		} catch (error) {
+			console.error('Error al enviar el formulario:', error);
+		}
+	};
 	return (
 		<div className="min-h-screen bg-gray-50">
 			<ECommerceHeader />
@@ -45,7 +98,7 @@ export default function ContactPage() {
 						<h2 className="text-2xl font-semibold text-gray-900 mb-6">
 							Envíanos un mensaje
 						</h2>
-						<form className="space-y-6">
+						<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 							<div>
 								<label
 									htmlFor="name"
@@ -57,7 +110,12 @@ export default function ContactPage() {
 									id="name"
 									type="text"
 									placeholder="Tu nombre completo"
+									{...register('name')}
+									className={errors.name ? 'border-red-500 focus:border-red-500' : ''}
 								/>
+								{errors.name && (
+									<p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+								)}
 							</div>
 							<div>
 								<label
@@ -70,20 +128,30 @@ export default function ContactPage() {
 									id="email"
 									type="email"
 									placeholder="tu@email.com"
+									{...register('email')}
+									className={errors.email ? 'border-red-500 focus:border-red-500' : ''}
 								/>
+								{errors.email && (
+									<p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+								)}
 							</div>
 							<div>
 								<label
 									htmlFor="phone"
 									className="block text-sm font-medium text-gray-700 mb-2"
 								>
-									Teléfono
+									Teléfono (opcional)
 								</label>
 								<Input
 									id="phone"
 									type="tel"
-									placeholder="+595 XXX XXX XXX"
+									placeholder="+595971746382"
+									{...register('phone')}
+									className={errors.phone ? 'border-red-500 focus:border-red-500' : ''}
 								/>
+								{errors.phone && (
+									<p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+								)}
 							</div>
 							<div>
 								<label
@@ -96,10 +164,19 @@ export default function ContactPage() {
 									id="message"
 									rows={5}
 									placeholder="Cuéntanos cómo podemos ayudarte..."
+									{...register('message')}
+									className={errors.message ? 'border-red-500 focus:border-red-500' : ''}
 								/>
+								{errors.message && (
+									<p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+								)}
 							</div>
-							<Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-								Enviar mensaje
+							<Button
+								type="submit"
+								disabled={isSubmitting}
+								className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed"
+							>
+								{isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
 							</Button>
 						</form>
 					</div>
@@ -120,7 +197,7 @@ export default function ContactPage() {
 								<div className="flex items-center space-x-3">
 									<Mail className="h-5 w-5 text-emerald-600" />
 									<span className="text-gray-700">
-										info@aldeatech.co
+										hola@aldeatech.co
 									</span>
 								</div>
 								<div className="flex items-center space-x-3">
@@ -189,3 +266,4 @@ export default function ContactPage() {
 		</div>
 	);
 }
+

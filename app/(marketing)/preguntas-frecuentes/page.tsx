@@ -255,19 +255,19 @@ export default function FAQPage() {
 													</div>
 													<ChevronDown
 														className={`w-6 h-6 text-muted-foreground transition-all duration-300 ${isOpen
-																? 'rotate-180 text-primary'
-																: 'group-hover:text-primary'
+															? 'rotate-180 text-primary'
+															: 'group-hover:text-primary'
 															}`}
 													/>
 												</button>
 
 												<div
 													className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen
-															? 'max-h-96 opacity-100'
-															: 'max-h-0 opacity-0'
+														? 'max-h-96 opacity-100'
+														: 'max-h-0 opacity-0'
 														}`}
 												>
-													<div className="px-8 pb-8 ml-16">
+													<div className="px-8 pb-8 ml-2">
 														<div className="bg-muted/20 rounded-xl p-6 border-l-4 border-primary/30">
 															<p className="text-muted-foreground leading-relaxed text-base">
 																{faq.answer}
@@ -348,7 +348,7 @@ export default function FAQPage() {
 									Contactar Soporte
 								</Button>
 							</Link>
-							<Link href="mailto:soporte@aldeatech.co">
+							<Link href="mailto:soporte@hola.co">
 								<Button
 									variant="outline"
 									size="lg"

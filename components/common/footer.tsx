@@ -16,18 +16,18 @@ export function ECommerceFooter() {
 					<div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm">
 						<div className="flex items-center gap-2">
 							<Phone className="w-4 h-4" />
-							<span>+1 (555) 123-4567</span>
+							<span>595 21 XXX XXX</span>
 						</div>
 						<div className="hidden md:block text-slate-400">|</div>
 						<div className="flex items-center gap-2">
 							<Mail className="w-4 h-4" />
-							<span>soporte@aldeatech.co</span>
+							<span>hola@aldeatech.co</span>
 						</div>
 						<div className="hidden md:block text-slate-400">|</div>
 						<div className="flex items-center gap-2">
 							<MapPin className="w-4 h-4" />
 							<span>
-								123 Calle Comercio, Ciudad Empresarial, BC 12345
+								123 Calle Comercio, Ciudad Empresarial
 							</span>
 						</div>
 					</div>

@@ -12,6 +12,7 @@ const slides = [
 		description: "Hasta 40% de descuento en productos seleccionados",
 		image: "/modern-tech-banner.png",
 		cta: "Comprar Ahora",
+		link: '/electronics',
 		bgColor: "bg-gradient-to-r from-gray-100 to-gray-200",
 	},
 	{
@@ -21,6 +22,7 @@ const slides = [
 		description: "Todo lo que necesitas para tu rendimiento",
 		image: "/summer-fashion-banner.png",
 		cta: "Ver Deportes",
+		link: '/deportes',
 		bgColor: "bg-gradient-to-r from-gray-200 to-gray-300",
 	},
 	{
@@ -30,6 +32,8 @@ const slides = [
 		description: "Consultoría y desarrollo personalizado",
 		image: "/modern-home-decor-banner.png",
 		cta: "Conocer Más",
+		link: "https://aldeatech.co",
+		target: "_blank",
 		bgColor: "bg-gradient-to-r from-gray-300 to-gray-200",
 	},
 ]
@@ -89,12 +93,21 @@ export function HeroCarousel() {
 							<h2 className="font-playfair text-3xl md:text-5xl font-bold text-foreground mb-2">{slide.title}</h2>
 							<p className="text-lg md:text-xl text-muted-foreground mb-2">{slide.subtitle}</p>
 							<p className="text-base md:text-lg text-muted-foreground mb-6">{slide.description}</p>
-							<Button
-								size="lg"
-								className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-							>
-								{slide.cta}
-							</Button>
+							{slide.link && (
+								<Button
+									size="lg"
+									className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+									asChild
+								>
+									<a
+										href={slide.link}
+										target={slide.target || "_self"}
+										rel={slide.target === "_blank" ? "noopener noreferrer" : undefined}
+									>
+										{slide.cta}
+									</a>
+								</Button>
+							)}
 						</div>
 					</div>
 				))}

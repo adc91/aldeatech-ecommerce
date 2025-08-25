@@ -32,7 +32,7 @@ export default function CartPage() {
 	}
 
 	const getTaxes = () => {
-		return Math.round(getTotalPrice() * 0.1) // 10% tax
+		return Math.round(getTotalPrice() * 0.1) // IVA (10%)
 	}
 
 	const getFinalTotal = () => {

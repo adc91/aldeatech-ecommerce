@@ -112,7 +112,7 @@ export function FAQSection() {
 										: 'max-h-0 opacity-0'
 										}`}
 								>
-									<div className="px-8 pb-8 ml-16">
+									<div className="px-8 pb-8 ml-2">
 										<div className="bg-muted/20 rounded-lg p-4 border-l-4 border-primary/30">
 											<p className="text-muted-foreground leading-relaxed text-base">
 												{faq.answer}
