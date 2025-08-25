@@ -238,7 +238,7 @@ aldea-ecommerce/
 │   ├── 📂 (marketing)/          # Grupo de rutas de marketing
 │   │   ├── 📂 contactanos/      # Página de contacto
 │   │   ├── 📂 preguntas-frecuentes/  # FAQ
-│   │   └── 📂 sobre-aldeatech/  # Acerca de
+│   │   └── 📂 nosotros/         # Acerca de
 │   │
 │   └── 📂 (shop)/               # Grupo de rutas de e-commerce
 │       ├── 📂 carrito/          # Carrito de compras

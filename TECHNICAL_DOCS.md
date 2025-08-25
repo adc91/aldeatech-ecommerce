@@ -26,7 +26,7 @@ App (layout.tsx)
 │   ├── (marketing)/ - Páginas de marketing
 │   │   ├── contactanos/
 │   │   ├── preguntas-frecuentes/
-│   │   └── sobre-aldeatech/
+│   │   └── nosotros/
 │   └── (shop)/ - Páginas de e-commerce
 │       ├── carrito/
 │       └── categorías (electronics, celulares, etc.)
