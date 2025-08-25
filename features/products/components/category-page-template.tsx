@@ -9,39 +9,8 @@ import { Slider } from "@/components/ui/slider"
 import { useCart } from "@/features/cart"
 import { ChevronDown, ChevronUp, Filter, Grid, RotateCcw, ShoppingCart } from "lucide-react"
 import Link from "next/link"
-import { useMemo, useState } from "react"
-
-interface Product {
-	id: number
-	name: string
-	price: string
-	originalPrice: string
-	image: string
-	category: string
-	brand: string
-	color: string
-	size?: string
-	priceValue: number
-}
-
-interface CategoryConfig {
-	name: string
-	icon: string
-	href: string
-}
-
-interface CategoryPageProps {
-	title: string
-	breadcrumb: string
-	heroTitle: string
-	heroSubtitle: string
-	categories: CategoryConfig[]
-	products: Product[]
-	brands: string[]
-	colors: { name: string; value: string; color: string }[]
-	sizes?: string[]
-	showSizes?: boolean
-}
+import { useEffect, useMemo, useState } from "react"
+import type { ProductDisplay, CategoryPageProps, Color, ColorSimple } from "@/src/types"
 
 export function CategoryPageTemplate({
 	title,
@@ -54,7 +23,15 @@ export function CategoryPageTemplate({
 	colors,
 	sizes = [],
 	showSizes = false,
+	hasMore = false,
+	loadingMore = false,
+	onLoadMore,
+	totalProducts,
 }: CategoryPageProps) {
+	// Helper functions for price formatting
+	const centavosToDollars = (centavos: number) => Math.round(centavos / 1000)
+	const dollarsToCentavos = (dollars: number) => dollars * 1000
+
 	const [openFilters, setOpenFilters] = useState({
 		price: true,
 		categories: true,
@@ -68,15 +45,11 @@ export function CategoryPageTemplate({
 		brands: [] as string[],
 		colors: [] as string[],
 		sizes: [] as string[],
-		priceRange: [0, 3000] as [number, number],
+		priceRange: [0, 3000000] as [number, number],
 	})
 
 	const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-	const [visibleProducts, setVisibleProducts] = useState(9);
 
-	const loadMoreProducts = () => {
-		setVisibleProducts((prev) => Math.min(prev + 6, filteredProducts.length));
-	};
 
 	const toggleFilter = (filter: keyof typeof openFilters) => {
 		setOpenFilters((prev) => ({ ...prev, [filter]: !prev[filter] }))
@@ -99,9 +72,8 @@ export function CategoryPageTemplate({
 			brands: [],
 			colors: [],
 			sizes: [],
-			priceRange: [0, 3000]
+			priceRange: [0, 3000000]
 		})
-		setVisibleProducts(12)
 	}
 
 	const hasActiveFilters = useMemo(() => {
@@ -111,20 +83,20 @@ export function CategoryPageTemplate({
 			filters.colors.length > 0 ||
 			filters.sizes.length > 0 ||
 			filters.priceRange[0] !== 0 ||
-			filters.priceRange[1] !== 3000
+			filters.priceRange[1] !== 3000000
 		)
 	}, [filters])
 
 	const filteredProducts = useMemo(() => {
 		return products.filter((product) => {
-			// Category filter
-			if (filters.category && product.category !== filters.category) return false
+			// Category filter - compare with subcategory for electronics
+			if (filters.category && product.subcategory !== filters.category) return false
 
 			// Brand filter
-			if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) return false
+			if (filters.brands.length > 0 && product.brand && !filters.brands.includes(product.brand)) return false
 
 			// Color filter
-			if (filters.colors.length > 0 && !filters.colors.includes(product.color)) return false
+			if (filters.colors.length > 0 && product.color && !filters.colors.includes(product.color)) return false
 
 			// Size filter
 			if (filters.sizes.length > 0 && product.size && !filters.sizes.includes(product.size)) return false
@@ -136,11 +108,11 @@ export function CategoryPageTemplate({
 		})
 	}, [products, filters])
 
-	const isLoadMoreDisabled = visibleProducts >= filteredProducts.length;
+	const isLoadMoreDisabled = !hasMore || loadingMore;
 
 	const { dispatch } = useCart()
 
-	const addToCart = (product: Product, e: React.MouseEvent) => {
+	const addToCart = (product: ProductDisplay, e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
 		dispatch({
@@ -264,30 +236,36 @@ export function CategoryPageTemplate({
 								{openFilters.price && (
 									<div className="space-y-4">
 										<Slider
-											value={filters.priceRange}
-											onValueChange={(value) => updateFilter("priceRange", value as [number, number])}
+											value={[centavosToDollars(filters.priceRange[0]), centavosToDollars(filters.priceRange[1])]}
+											onValueChange={(value) => updateFilter("priceRange", [dollarsToCentavos(value[0]), dollarsToCentavos(value[1])] as [number, number])}
 											max={3000}
 											min={0}
 											step={50}
 											className="w-full"
 										/>
 										<div className="flex gap-2">
-											<Input
-												placeholder="Mín"
-												className="text-sm"
-												value={filters.priceRange[0]}
-												onChange={(e) =>
-													updateFilter("priceRange", [Number.parseInt(e.target.value) || 0, filters.priceRange[1]])
-												}
-											/>
-											<Input
-												placeholder="Máx"
-												className="text-sm"
-												value={filters.priceRange[1]}
-												onChange={(e) =>
-													updateFilter("priceRange", [filters.priceRange[0], Number.parseInt(e.target.value) || 3000])
-												}
-											/>
+											<div className="relative flex-1">
+												<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground">$</span>
+												<Input
+													placeholder="Mín"
+													className="text-sm pl-8"
+													value={centavosToDollars(filters.priceRange[0])}
+													onChange={(e) =>
+														updateFilter("priceRange", [dollarsToCentavos(Number.parseInt(e.target.value) || 0), filters.priceRange[1]])
+													}
+												/>
+											</div>
+											<div className="relative flex-1">
+												<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground">$</span>
+												<Input
+													placeholder="Máx"
+													className="text-sm pl-8"
+													value={centavosToDollars(filters.priceRange[1])}
+													onChange={(e) =>
+														updateFilter("priceRange", [filters.priceRange[0], dollarsToCentavos(Number.parseInt(e.target.value) || 3000)])
+													}
+												/>
+											</div>
 										</div>
 									</div>
 								)}
@@ -338,7 +316,7 @@ export function CategoryPageTemplate({
 											<button
 												key={color.value}
 												onClick={() => toggleArrayFilter("colors", color.value)}
-												className={`w-8 h-8 rounded-full ${color.color} hover:scale-110 transition-all cursor-pointer shadow-sm hover:shadow-md border-2 ${filters.colors.includes(color.value) ? "border-primary" : "border-transparent"
+												className={`w-8 h-8 rounded-full ${color.css_class} hover:scale-110 transition-all cursor-pointer shadow-sm hover:shadow-md border-2 ${filters.colors.includes(color.value) ? "border-primary" : "border-transparent"
 													}`}
 												title={color.name}
 											/>
@@ -414,7 +392,9 @@ export function CategoryPageTemplate({
 					{/* Product Grid */}
 					<div className="lg:w-3/4">
 						<div className="flex items-center justify-between mb-6">
-							<p className="text-muted-foreground">Mostrando {filteredProducts.length} productos</p>
+							<p className="text-muted-foreground">
+								Mostrando {products.length} de {totalProducts || filteredProducts.length} productos
+							</p>
 							<div className="flex items-center gap-2">
 								<button
 									onClick={toggleViewMode}
@@ -442,7 +422,7 @@ export function CategoryPageTemplate({
 									: 'space-y-6'
 							}
 						>
-							{filteredProducts.slice(0, visibleProducts).map((product) => (
+							{filteredProducts.map((product) => (
 								<div
 									key={product.id}
 									className={
@@ -491,15 +471,24 @@ export function CategoryPageTemplate({
 						</div>
 
 						{/* Load More Button */}
-						<div className="text-center mt-12">
-							<Button
-								onClick={loadMoreProducts}
-								disabled={isLoadMoreDisabled}
-								className={`bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 transition-colors duration-200 ${isLoadMoreDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-							>
-								{isLoadMoreDisabled ? 'No hay más productos' : 'Mostrar más productos'}
-							</Button>
-						</div>
+						{hasMore && onLoadMore && (
+							<div className="text-center mt-12">
+								<Button
+									onClick={onLoadMore}
+									disabled={isLoadMoreDisabled}
+									className={`bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 transition-colors duration-200 ${isLoadMoreDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+								>
+									{loadingMore ? (
+										<>
+											<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+											Cargando...
+										</>
+									) : (
+										'Mostrar más productos'
+									)}
+								</Button>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

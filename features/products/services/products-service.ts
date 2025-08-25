@@ -4,10 +4,10 @@ export class ProductsService {
 	/**
 	 * Filter products by category
 	 */
-	static filterByCategory(products: Product[], category: string): Product[] {
-		if (!category || category === 'all') return products
+	static filterByCategory(products: Product[], categorySlug: string): Product[] {
+		if (!categorySlug || categorySlug === 'all') return products
 		return products.filter(product => 
-			product.category?.toLowerCase() === category.toLowerCase()
+			product.category_id === parseInt(categorySlug) || product.slug?.includes(categorySlug)
 		)
 	}
 
@@ -28,19 +28,25 @@ export class ProductsService {
 		// In stock filter
 		if (filters.inStock !== undefined) {
 			filtered = filtered.filter(product => 
-				product.inStock === filters.inStock
+				product.active === filters.inStock
 			)
 		}
 
 		// Sorting
 		if (filters.sortBy) {
 			filtered.sort((a, b) => {
-				let aValue: any = a[filters.sortBy!]
-				let bValue: any = b[filters.sortBy!]
+				let aValue: any
+				let bValue: any
 
-				if (filters.sortBy === 'price') {
+				if (filters.sortBy === 'name') {
+					aValue = a.name
+					bValue = b.name
+				} else if (filters.sortBy === 'price') {
 					aValue = a.priceValue
 					bValue = b.priceValue
+				} else if (filters.sortBy === 'newest') {
+					aValue = new Date(a.created_at)
+					bValue = new Date(b.created_at)
 				}
 
 				const comparison = aValue < bValue ? -1 : aValue > bValue ? 1 : 0
@@ -83,12 +89,13 @@ export class ProductsService {
 	 * Get related products (same category, excluding current)
 	 */
 	static getRelated(products: Product[], currentProduct: Product, limit = 4): Product[] {
-		if (!currentProduct.category) return []
+		if (!currentProduct.category_id) return []
 
 		return products
 			.filter(product => 
-				product.category === currentProduct.category && 
-				product.id !== currentProduct.id
+				product.category_id === currentProduct.category_id && 
+				product.id !== currentProduct.id &&
+				product.active
 			)
 			.slice(0, limit)
 	}

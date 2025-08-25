@@ -5,17 +5,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/src/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-
-interface Product {
-	id: number
-	name: string
-	price: string
-	image?: string
-	description?: string
-}
+import type { ProductDisplay } from '@/src/types';
 
 export function FeaturedProducts() {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [products, setProducts] = useState<ProductDisplay[]>([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [loading, setLoading] = useState(true);
 
