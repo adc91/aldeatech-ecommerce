@@ -386,7 +386,7 @@ const getShipping = () => {
 }
 
 const getTaxes = () => {
-  return Math.round(getSubtotal() * 0.19) // IVA 19%
+return Math.round(getSubtotal() * 0.10) // IVA 10%
 }
 
 const getFinalTotal = () => {

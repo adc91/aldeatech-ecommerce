@@ -32,7 +32,7 @@ export default function CartPage() {
 	}
 
 	const getTaxes = () => {
-		return Math.round(getTotalPrice() * 0.19) // 19% tax
+		return Math.round(getTotalPrice() * 0.1) // 10% tax
 	}
 
 	const getFinalTotal = () => {
@@ -193,7 +193,7 @@ export default function CartPage() {
 									</div>
 
 									<div className="flex justify-between text-sm">
-										<span className="text-muted-foreground">Impuestos (19%)</span>
+										<span className="text-muted-foreground">Impuestos (10%)</span>
 										<span className="font-medium text-foreground">${getTaxes().toLocaleString()}</span>
 									</div>
 
