@@ -221,6 +221,20 @@ aldea-ecommerce/
 │   ├── 📄 page.tsx              # Página principal (homepage)
 │   ├── 📄 globals.css           # Estilos Tailwind globales
 │   │
+│   ├── 📂 api/                  # API Routes
+│   │   ├── 📂 categories/       # API de categorías
+│   │   │   ├── 📄 route.ts      # GET /api/categories
+│   │   │   └── 📂 [slug]/       # GET /api/categories/[slug]
+│   │   │       └── 📄 route.ts
+│   │   ├── 📂 products/         # API de productos
+│   │   │   ├── 📄 route.ts      # GET /api/products
+│   │   │   └── 📂 [id]/         # GET /api/products/[id]
+│   │   │       └── 📄 route.ts
+│   │   ├── 📂 brands/           # API de marcas
+│   │   │   └── 📄 route.ts      # GET /api/brands
+│   │   └── 📂 colors/           # API de colores
+│   │       └── 📄 route.ts      # GET /api/colors
+│   │
 │   ├── 📂 (marketing)/          # Grupo de rutas de marketing
 │   │   ├── 📂 contactanos/      # Página de contacto
 │   │   ├── 📂 preguntas-frecuentes/  # FAQ
@@ -289,7 +303,8 @@ aldea-ecommerce/
 │
 ├── 📂 src/                      # Código fuente organizado
 │   ├── 📂 lib/                  # Utilidades y helpers
-│   │   └── 📄 utils.ts          # Utilidades de Tailwind (cn function)
+│   │   ├── 📄 utils.ts          # Utilidades de Tailwind (cn function)
+│   │   └── 📄 json-database.ts  # Base de datos JSON ✅
 │   │
 │   ├── 📂 hooks/                # Hooks genéricos reutilizables
 │   │   ├── 📄 use-mobile.ts     # Detectar dispositivos móviles
@@ -297,6 +312,9 @@ aldea-ecommerce/
 │   │
 │   └── 📂 styles/               # Estilos globales
 │       └── 📄 globals.css       # CSS global de Tailwind
+│
+├── 📂 data/                     # Base de datos JSON ✅
+│   └── 📄 database.json         # Datos de productos, categorías, etc.
 │
 ├── 📂 public/                   # Assets estáticos
 │   ├── 🖼️ aldeatech-logo-*.png  # Logos de la marca
@@ -712,15 +730,17 @@ import Image from 'next/image'
 ### Próxima Versión (v1.1) - Funcionalidad Básica
 
 #### Backend y Datos 🗄️
-- [ ] **API Routes con Next.js**
-  - `app/api/products/route.ts` - CRUD de productos
-  - `app/api/categories/route.ts` - Gestión de categorías
-  - `app/api/cart/route.ts` - Persistencia de carrito
+- [x] **API Routes con Next.js** ✅
+  - `app/api/products/route.ts` - Obtener productos con filtros
+  - `app/api/categories/route.ts` - Gestión de categorías  
+  - `app/api/brands/route.ts` - API de marcas
+  - `app/api/colors/route.ts` - API de colores
   
-- [ ] **Base de Datos**
-  - Prisma + SQLite para desarrollo
-  - PostgreSQL para producción
-  - Modelos: Product, Category, CartItem
+- [x] **Base de Datos JSON** ✅
+  - `src/lib/json-database.ts` - Servicio de base de datos
+  - `data/database.json` - Almacenamiento de datos
+  - Interfaces: Product, Category, Brand, Color
+  - [ ] Migración futura a PostgreSQL
 
 #### Autenticación 👤
 - [ ] **Sistema de Usuarios**
@@ -729,9 +749,10 @@ import Image from 'next/image'
   - Páginas: `/login`, `/register`, `/profile`
   
 #### Búsqueda y Filtros 🔍
-- [ ] **Funcionalidad de Búsqueda**
-  - Componente SearchBar funcional
-  - API de búsqueda con filtros
+- [x] **UI de Búsqueda** ✅
+  - Componente SearchBar en header (UI implementado)
+- [ ] **Funcionalidad de Búsqueda Backend**
+  - API de búsqueda con filtros avanzados
   - Página de resultados `/search`
 
 ### Versión 1.2 - E-Commerce Completo
